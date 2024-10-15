@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { IMAGES } from "@/core/shared/lib/constants/images";
 import { format } from "@formkit/tempo";
-import AuthorsList from "@/core/authors/presentation/components/authors-list";
+import AuthorsList from "@/core/authors/presentation/components/autors-list";
 import BackButton from "@/core/shared/components/ui/backbutton";
 import ParticipateButton from "../components/participate-button";
 import { cn } from "@/core/shared/lib/utils";

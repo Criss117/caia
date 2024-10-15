@@ -5,14 +5,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/core/shared/components/ui/carousel";
-import AuthorCard from "./author-card";
+import AuthorCard from "./autor-card";
 import { cn } from "@/core/shared/lib/utils";
 
 interface Props {
   onDashboard?: boolean;
 }
 
-const AuthorsList = ({ onDashboard = false }: Props) => {
+const AutorsList = ({ onDashboard = false }: Props) => {
   const randomKey = Math.floor(Math.random() * 10);
 
   return (
@@ -37,4 +37,4 @@ const AuthorsList = ({ onDashboard = false }: Props) => {
   );
 };
 
-export default AuthorsList;
+export default AutorsList;

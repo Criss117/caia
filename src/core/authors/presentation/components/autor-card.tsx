@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AUTHORS_IMAGES } from "../../../shared/lib/constants/images";
+import { AUTORS_IMAGES } from "../../../shared/lib/constants/images";
 import {
   Card,
   CardContent,
@@ -9,9 +9,11 @@ import {
   CardTitle,
 } from "@/core/shared/components/ui/card";
 
-const AuthorCard = () => {
-  const keys = Object.keys(AUTHORS_IMAGES);
-  const randomKey = keys[Math.floor(Math.random() * keys.length)];
+const AutorCard = () => {
+  const keys = Object.keys(AUTORS_IMAGES);
+  const randomKey = keys[
+    Math.floor(Math.random() * keys.length)
+  ] as keyof typeof AUTORS_IMAGES;
 
   return (
     <Card>
@@ -20,8 +22,9 @@ const AuthorCard = () => {
           <CardTitle></CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>
+
         <Image
-          src={AUTHORS_IMAGES[randomKey]}
+          src={AUTORS_IMAGES[randomKey]}
           alt="author"
           className="rounded-md object-cover mx-auto"
           width={300}
@@ -40,4 +43,4 @@ const AuthorCard = () => {
   );
 };
 
-export default AuthorCard;
+export default AutorCard;
