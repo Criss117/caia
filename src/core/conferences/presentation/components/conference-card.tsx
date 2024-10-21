@@ -3,20 +3,22 @@ import Link from "next/link";
 import { IMAGES } from "../../../shared/lib/constants/images";
 import { format } from "@formkit/tempo";
 import { ROUTES } from "@/core/shared/lib/constants/routes";
+import { ConferencesDto } from "../../data/dto/conference.dto";
 
 interface Props {
+  conference: ConferencesDto;
   onDashboard?: boolean;
 }
 
-const ConferenceCard = ({ onDashboard = false }: Props) => {
+const ConferenceCard = ({ conference, onDashboard = false }: Props) => {
   const date = new Date();
 
   return (
     <Link
       href={
         onDashboard
-          ? ROUTES.DASHBOARD.CONFERENCES + "/1"
-          : ROUTES.CONFERENCE + "/1"
+          ? ROUTES.DASHBOARD.CONFERENCES + "/" + conference.slug
+          : ROUTES.CONFERENCE + "/" + conference.slug
       }
       className="mx-auto hover:shadow-lg w-64 xl:w-72 rounded-lg transition-all duration-500"
     >
@@ -30,13 +32,10 @@ const ConferenceCard = ({ onDashboard = false }: Props) => {
         />
       </header>
       <div className="px-5 py-2 space-y-2 mb-5 mt-2">
-        <h3 className="font-semibold text-xl">Titulo de la conferencia</h3>
+        <h3 className="font-semibold text-xl">{conference.name}</h3>
         <p>{format(date, "long")}</p>
         <p className="font-semibold">Desde $ 10,000.0</p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa qui et
-          dolorem, corrupti maxime quod tempore non totam optio...
-        </p>
+        <p>{conference.description}</p>
       </div>
     </Link>
   );

@@ -1,6 +1,11 @@
-import ConferenceCard from "../../../../conferences/presentation/components/conference-card";
+import ConferenceCard from "@/core/conferences/presentation/components/conference-card";
+import findConferencesAction from "../../data/actions/find-conferences";
 
-const ConferencesListSection = () => {
+const ConferencesListSection = async () => {
+  const { data } = await findConferencesAction(null);
+
+  console.log({ data });
+
   return (
     <section aria-label="Conferences List Section" className="mx-auto">
       <header className="border-y-2 py-5">
@@ -11,8 +16,8 @@ const ConferencesListSection = () => {
         </div>
       </header>
       <div className="w-[80%] mx-auto grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 gap-y-10 my-10">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <ConferenceCard key={index} />
+        {data?.map((conference, index) => (
+          <ConferenceCard conference={conference} key={index} />
         ))}
       </div>
     </section>
