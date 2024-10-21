@@ -1,10 +1,12 @@
 import { Search } from "lucide-react";
-import CaiaTitle from "../ui/caia-title";
+import { auth } from "@/auth";
+
 import { Input } from "../ui/input";
-import { ROUTES } from "../../lib/constants/routes";
-import LinkAnimated from "../ui/link-animated";
 import { cn } from "../../lib/utils";
 import BurgerMenu from "./burger-menu";
+import CaiaTitle from "../ui/caia-title";
+import { ROUTES } from "../../lib/constants/routes";
+import LinkAnimated from "../ui/link-animated";
 
 interface Props {
   className?: string;
@@ -24,9 +26,13 @@ const routes = [
     name: "Iniciar sesión",
     href: ROUTES.LOGIN,
   },
-];
+] as const;
 
-const LandingNavbar = ({ search = false, className }: Props) => {
+const LandingNavbar = async ({ search = false, className }: Props) => {
+  const session = await auth();
+
+  console.log({ session });
+
   return (
     <header
       className={cn(
@@ -50,7 +56,15 @@ const LandingNavbar = ({ search = false, className }: Props) => {
         </div>
         <div className="w-full hidden md:flex justify-end gap-x-10">
           {routes.map((route, index) => (
-            <LinkAnimated key={index} href={route.href} className="text-sm">
+            <LinkAnimated
+              key={index}
+              href={
+                route.href === "/dashboard" && session
+                  ? ROUTES.DASHBOARD.ROOT
+                  : ROUTES.LOGIN
+              }
+              className="text-sm"
+            >
               {route.name}
             </LinkAnimated>
           ))}

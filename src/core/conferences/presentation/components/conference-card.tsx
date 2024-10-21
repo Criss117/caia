@@ -18,7 +18,7 @@ const ConferenceCard = ({ onDashboard = false }: Props) => {
           ? ROUTES.DASHBOARD.CONFERENCES + "/1"
           : ROUTES.CONFERENCE + "/1"
       }
-      className="mx-auto hover:shadow-lg w-80 rounded-lg transition-all duration-500"
+      className="mx-auto hover:shadow-lg w-64 xl:w-72 rounded-lg transition-all duration-500"
     >
       <header>
         <Image

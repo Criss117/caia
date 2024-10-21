@@ -31,7 +31,7 @@ const SideBar = () => {
               >
                 <Link href={route.path}>
                   <route.Icon className="mr-2" />
-                  <p className="hidden lg:block">{route.name}</p>
+                  <p>{route.name}</p>
                 </Link>
               </Button>
             ))}

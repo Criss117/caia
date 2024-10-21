@@ -3,7 +3,7 @@ export const IMAGES = {
   CONFENRENCE: "/conference.webp",
 } as const;
 
-export const AUTORS_IMAGES = {
+export const AUTHORS_IMAGES = {
   midudev: "/midudev.jpeg",
   mauredev: "/mouredev.png",
   carmenansio: "/carmenansio.webp",

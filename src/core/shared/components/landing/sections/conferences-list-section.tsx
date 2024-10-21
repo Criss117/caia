@@ -10,8 +10,8 @@ const ConferencesListSection = () => {
           </h3>
         </div>
       </header>
-      <div className="w-[80%] mx-auto grid md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 gap-y-10 my-10">
-        {Array.from({ length: 3 }).map((_, index) => (
+      <div className="w-[80%] mx-auto grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 gap-y-10 my-10">
+        {Array.from({ length: 6 }).map((_, index) => (
           <ConferenceCard key={index} />
         ))}
       </div>
