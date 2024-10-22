@@ -15,7 +15,7 @@ const DiscoverConferencesScreen = () => {
         />
       </div>
       <div>
-        <ConferencesList />
+        <ConferencesList onDiscover />
       </div>
     </>
   );

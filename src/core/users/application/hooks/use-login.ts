@@ -12,8 +12,8 @@ import { LoginSchema } from "../models/schemas";
 import { ROUTES } from "@/core/shared/lib/constants/routes";
 
 const defaultValues: LoginDto = {
-  email: "andres@email.com",
-  password: "cualquier cosa",
+  email: "cristian@email.com",
+  password: "holamundo",
 };
 
 const useLogin = () => {

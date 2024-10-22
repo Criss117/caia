@@ -40,5 +40,6 @@ declare module "next-auth" {
   interface Session {
     email: string;
     jwt: string;
+    status: boolean;
   }
 }

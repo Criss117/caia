@@ -12,3 +12,8 @@ export interface AuditMetadata {
   updatedAt: Date | null;
   deletedAt: Date | null;
 }
+
+export interface ConferenceWithRole {
+  conference: ConferencesDto;
+  isOrganizer: boolean;
+}

@@ -4,8 +4,6 @@ import findConferencesAction from "../../data/actions/find-conferences";
 const ConferencesListSection = async () => {
   const { data } = await findConferencesAction(null);
 
-  console.log({ data });
-
   return (
     <section aria-label="Conferences List Section" className="mx-auto">
       <header className="border-y-2 py-5">

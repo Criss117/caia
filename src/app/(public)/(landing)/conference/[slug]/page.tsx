@@ -2,16 +2,12 @@ import ConferenceScreen from "@/core/conferences/presentation/screens/conference
 
 interface Props {
   params: {
-    conferenceId: string;
+    slug: string;
   };
 }
 
-const PublicConferencePage = ({}: Props) => {
-  return (
-    <div className="w-[60%] mx-auto">
-      <ConferenceScreen />
-    </div>
-  );
+const PublicConferencePage = ({ params: { slug } }: Props) => {
+  return <ConferenceScreen slug={slug} />;
 };
 
 export default PublicConferencePage;

@@ -14,10 +14,14 @@ import {
 } from "@/core/shared/components/ui/dropdown-menu";
 import { ROUTES } from "@/core/shared/lib/constants/routes";
 
-const ParticipateButton = () => {
+interface Props {
+  slug: string;
+}
+
+const ParticipateButton = ({ slug }: Props) => {
   const sendPaperUrl = ROUTES.DASHBOARD.SEND_PAPER.replace(
     "[conferenceId]",
-    "1"
+    slug
   );
 
   return (

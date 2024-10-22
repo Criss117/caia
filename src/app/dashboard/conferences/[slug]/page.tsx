@@ -2,12 +2,12 @@ import ConferenceScreen from "@/core/conferences/presentation/screens/conference
 
 interface Props {
   params: {
-    conferenceId: string;
+    slug: string;
   };
 }
 
-const ConferenceDashboardPage = ({}: Props) => {
-  return <ConferenceScreen onDashboard />;
+const ConferenceDashboardPage = ({ params: { slug } }: Props) => {
+  return <ConferenceScreen onDashboard slug={slug} />;
 };
 
 export default ConferenceDashboardPage;

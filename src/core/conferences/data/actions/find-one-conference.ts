@@ -1,20 +1,24 @@
 "use server";
 
-import { AxiosError } from "axios";
-
 import { httpClient } from "@/core/shared/lib/config/http.config";
 import { CommonResponse } from "@/core/shared/models/type";
-import { ConferencesDto } from "../dto/conference.dto";
+import { ConferencesDto, ConferenceWithRole } from "../dto/conference.dto";
+import { AxiosError } from "axios";
 
-async function findWithoutAuth() {
-  return await httpClient.get<CommonResponse<ConferencesDto[]>>(
-    "/conferences/public"
+interface Args {
+  slug: string;
+  jwt?: string;
+}
+
+async function findWithoutAuth(slug: string) {
+  return await httpClient.get<CommonResponse<ConferencesDto>>(
+    `/conferences/public/${slug}`
   );
 }
 
-async function findMany(jwt: string | null) {
-  return await httpClient.get<CommonResponse<ConferencesDto[]>>(
-    "/conferences/find",
+async function findOne(jwt: string, slug: string) {
+  return await httpClient.get<CommonResponse<ConferenceWithRole>>(
+    `/conferences/private/${slug}`,
     {
       headers: {
         Authorization: `Bearer ${jwt}`,
@@ -23,22 +27,26 @@ async function findMany(jwt: string | null) {
   );
 }
 
-async function findConferencesAction(
-  jwt: string | null
-): Promise<CommonResponse<ConferencesDto[] | null>> {
+async function findOneConferenceAction({
+  jwt,
+  slug,
+}: Args): Promise<CommonResponse<ConferenceWithRole | null>> {
   try {
     if (!jwt) {
-      const res = await findWithoutAuth();
+      const res = await findWithoutAuth(slug);
 
       return {
-        data: res.data.data,
+        data: {
+          conference: res.data.data,
+          isOrganizer: false,
+        },
         status: res.status,
         message: res.data.message,
         error: res.data.error,
       };
     }
 
-    const res = await findMany(jwt);
+    const res = await findOne(jwt, slug);
 
     return {
       data: res.data.data,
@@ -65,4 +73,4 @@ async function findConferencesAction(
   }
 }
 
-export default findConferencesAction;
+export default findOneConferenceAction;

@@ -13,7 +13,7 @@ interface Props {
   search?: boolean;
 }
 
-const routes = [
+const publicRoutes = [
   {
     name: "Crea conferencias",
     href: ROUTES.DASHBOARD.ROOT,
@@ -28,10 +28,21 @@ const routes = [
   },
 ] as const;
 
+const authRoutes = [
+  {
+    name: "Crea conferencias",
+    href: ROUTES.DASHBOARD.CREATE_CONFERENCES,
+  },
+  {
+    name: "Ir al dashboard",
+    href: ROUTES.DASHBOARD.ROOT,
+  },
+] as const;
+
 const LandingNavbar = async ({ search = false, className }: Props) => {
   const session = await auth();
 
-  console.log({ session });
+  const routes = session ? authRoutes : publicRoutes;
 
   return (
     <header
@@ -56,15 +67,7 @@ const LandingNavbar = async ({ search = false, className }: Props) => {
         </div>
         <div className="w-full hidden md:flex justify-end gap-x-10">
           {routes.map((route, index) => (
-            <LinkAnimated
-              key={index}
-              href={
-                route.href === "/dashboard" && session
-                  ? ROUTES.DASHBOARD.ROOT
-                  : ROUTES.LOGIN
-              }
-              className="text-sm"
-            >
+            <LinkAnimated key={index} href={route.href} className="text-sm">
               {route.name}
             </LinkAnimated>
           ))}
