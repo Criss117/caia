@@ -50,9 +50,7 @@ const ConferenceScreen = async ({ onDashboard = false, slug }: Props) => {
             <h2 className="text-4xl font-black">{data.conference.name}</h2>
             <p>{format(date, "long")}</p>
           </div>
-          <div>
-            <ParticipateButton slug={slug} />
-          </div>
+          <div>{!data.isOrganizer && <ParticipateButton slug={slug} />}</div>
         </div>
       </header>
       <div

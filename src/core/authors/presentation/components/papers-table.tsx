@@ -8,8 +8,17 @@ import {
   TableRow,
 } from "@/core/shared/components/ui/table";
 import { format } from "@formkit/tempo";
+import { PaperDto } from "../../data/dto/papers.dto";
+import { PAPER_STATE } from "../../../shared/lib/constants/paper-state";
+import { Button } from "@/core/shared/components/ui/button";
+import Link from "next/link";
+import { ROUTES } from "@/core/shared/lib/constants/routes";
 
-const PapersTable = () => {
+interface Props {
+  papers: PaperDto[];
+}
+
+const PapersTable = ({ papers }: Props) => {
   return (
     <Table>
       <TableCaption>Lista de papers</TableCaption>
@@ -20,25 +29,35 @@ const PapersTable = () => {
           <TableHead className="">Status</TableHead>
           <TableHead className="text-right">Revisor(es)</TableHead>
           <TableHead className="text-right">Última actualización</TableHead>
+          <TableHead className="text-right">Acciones</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">Conferencia 1</TableCell>
-          <TableCell>Paper 1</TableCell>
-          <TableCell>pendiente</TableCell>
-          <TableCell className="text-right">Aristoteles, Carl Marx</TableCell>
-          <TableCell className="text-right">{format(new Date())}</TableCell>
-        </TableRow>
-      </TableBody>
-      <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">Conferencia 2</TableCell>
-          <TableCell>Paper 2</TableCell>
-          <TableCell>rechazado</TableCell>
-          <TableCell className="text-right">Aristoteles, Carl Marx</TableCell>
-          <TableCell className="text-right">{format(new Date())}</TableCell>
-        </TableRow>
+        {papers.map((paper) => (
+          <TableRow key={paper.id}>
+            <TableCell className="font-medium">
+              {paper.conferenceEntity.name}
+            </TableCell>
+            <TableCell>{paper.title}</TableCell>
+            <TableCell>{PAPER_STATE[paper.state]}</TableCell>
+            <TableCell className="text-right">Aristoteles, Carl Marx</TableCell>
+            <TableCell className="text-right">
+              {format(new Date(paper.auditMetadata.updatedAt))}
+            </TableCell>
+            <TableCell className="text-right">
+              <Button asChild>
+                <Link
+                  href={ROUTES.DASHBOARD.EDIT_PAPER.replace(
+                    "[paperId]",
+                    paper.id.toString()
+                  )}
+                >
+                  Editar
+                </Link>
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   );

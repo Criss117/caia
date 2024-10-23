@@ -13,6 +13,7 @@ export const ROUTES = {
     OWN: "/dashboard/conferences/own",
     DISCOVER: "/dashboard/conferences",
     PAPERS: "/dashboard/papers",
+    EDIT_PAPER: "/dashboard/papers/[paperId]/edit",
     PAPERS_NEW: "/dashboard/papers/new",
     INVITATIONS: "/dashboard/reviewer/invitations",
     ASSIGNED_PAPERS: "/dashboard/reviewer/papers",
